@@ -1,9 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="refresh" content="0; url=sauscraft.html">
-  </head>
-  <body>
-    <p>If the download doesn’t start, <a href="sauscraft.html">click here</a>.</p>
-  </body>
+<body>
+<button onclick="download()">Download HTML</button>
+
+<script>
+async function download() {
+  const response = await fetch("sauscraft.html");
+  const text = await response.text();
+
+  const blob = new Blob([text], { type: "text/html" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "sauscraft.html";
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+</script>
+</body>
 </html>
